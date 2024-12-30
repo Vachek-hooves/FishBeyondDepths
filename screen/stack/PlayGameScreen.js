@@ -189,8 +189,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   coral: {
-    width: CELL_SIZE * 0.9,
-    height: CELL_SIZE * 0.9,
+    width: CELL_SIZE * 0.95,
+    height: CELL_SIZE * 0.95,
     resizeMode: 'contain',
     position: 'absolute',
   },
