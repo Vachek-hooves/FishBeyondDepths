@@ -1,0 +1,51 @@
+export const FISHES = [
+  {
+    id: 1,
+    name: 'Fish 1',
+    image: require('../assets/images/fishes/fish1.png'),
+    isActive: true,
+    price: 0,
+  },
+  {
+    id: 2,
+    name: 'Fish 2',
+    image: require('../assets/images/fishes/fish2.png'),
+    isActive: false,
+    price: 100,
+  },
+  {
+    id: 3,
+    name: 'Fish 3',
+    image: require('../assets/images/fishes/fish3.png'),
+    isActive: false,
+    price: 100,
+  },
+  {
+    id: 4,
+    name: 'Fish 4',
+    image: require('../assets/images/fishes/fish4.png'),
+    isActive: false,
+    price: 100,
+  },
+  {
+    id: 5,
+    name: 'Fish 5',
+    image: require('../assets/images/fishes/fish5.png'),
+    isActive: false,
+    price: 100,
+  },
+  {
+    id: 6,
+    name: 'Fish 6',
+    image: require('../assets/images/fishes/fish6.png'),
+    isActive: false,
+    price: 100,
+  },
+  {
+    id: 7,
+    name: 'Fish 7',
+    image: require('../assets/images/fishes/fish7.png'),
+    isActive: false,
+    price: 100,
+  },
+];

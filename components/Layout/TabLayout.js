@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, ImageBackground} from 'react-native';
 const TabLayout = ({children}) => {
   return (
     <ImageBackground
-      source={require('../../assets/images/bg/bgdeafault.png')}
+      source={require('../../assets/images/bg/bg1.png')}
       style={styles.container}>
       {children}
     </ImageBackground>
