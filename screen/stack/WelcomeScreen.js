@@ -1,14 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
+import TabLayout from '../../components/Layout/TabLayout';
+import {BlueFish} from '../../components/UI';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}) => {
   return (
-    <View>
-      <Text>WelcomeScreen</Text>
-    </View>
-  )
-}
+    <TabLayout>
+      <BlueFish />
+      <Text>Welcome to Fish Beyond the Depths!</Text>
+      <Text>
+        Swipe in any direction to guide your fish through the depths. But be
+        careful—one wrong move, and the adventure ends!
+      </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('TabNavigator')}>
+        <Text>Start</Text>
+      </TouchableOpacity>
+    </TabLayout>
+  );
+};
 
-export default WelcomeScreen
+export default WelcomeScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
