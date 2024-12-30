@@ -1,16 +1,31 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import GameLayout from '../../components/Layout/GameLayout';
-import {HomeIconNavigation} from '../../components/UI';
+import {ScrollView, StyleSheet, Text} from 'react-native';
+import PlainLayout from '../../components/Layout/PlainLayout';
+import Header from '../../components/UI/Header';
+import {info} from '../../data/info';
 
 const InfoScreen = () => {
   return (
-    <GameLayout>
-      <HomeIconNavigation />
-    </GameLayout>
+    <PlainLayout>
+      <Header title={'About'} />
+      <ScrollView>
+        {info.map(text => {
+          return <Text style={styles.title}>{text.text}</Text>;
+        })}
+      </ScrollView>
+    </PlainLayout>
   );
 };
 
 export default InfoScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 22,
+    fontWeight: '600',
+    letterSpacing: 2,
+    textAlign: 'justify',
+    marginTop: 20,
+    paddingHorizontal: 10,
+    color: 'white',
+  },
+});

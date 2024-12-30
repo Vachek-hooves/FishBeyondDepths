@@ -13,7 +13,7 @@ const HomeIconNavigation = () => {
         onPress={() =>
           navigation.navigate('TabNavigator', {screen: 'HomeScreen'})
         }>
-        <Icon name="home" size={24} color="#FFD700" />
+        <Icon name="home" size={32} color="#FFD700" />
       </TouchableOpacity>
     </View>
   );
@@ -23,20 +23,15 @@ export default HomeIconNavigation;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    position: 'absolute',
-    top: '10%',
-    // left: '10%',
-    // top: 50,
-    width: '50%',
-    right: -50,
+    // position: 'absolute',
+    // top: '10%',
+    // width: '50%',
+    // right: -50,
   },
   iconContainer: {
     backgroundColor: '#0096FF',
-    width: 45,
-    height: 45,
+    width: 55,
+    height: 55,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
