@@ -3,7 +3,11 @@ import TabLayout from '../../components/Layout/TabLayout';
 import GameLayout from '../../components/Layout/GameLayout';
 
 const HomeScreen = () => {
-  return <GameLayout></GameLayout>;
+  return (
+    <GameLayout>
+     
+    </GameLayout>
+  );
 };
 
 export default HomeScreen;
