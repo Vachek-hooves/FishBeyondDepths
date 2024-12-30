@@ -28,6 +28,11 @@ const ShopScreen = () => {
     setCurrentIndex(prev => (prev < items.length - 1 ? prev + 1 : 0));
   };
 
+  const handleSet = () => {
+    // Will add logic later to set background or fish
+    console.log('Setting', activeTab, items[currentIndex].name);
+  };
+
   const TabButton = ({title}) => (
     <TouchableOpacity
       style={[styles.tabButton, activeTab === title && styles.activeTabButton]}
@@ -73,19 +78,21 @@ const ShopScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          style={styles.unlockButton}
-          disabled={items[currentIndex].isActive}>
-          <Text style={styles.unlockText}>
-            {items[currentIndex].isActive ? 'Unlocked' : 'Unlock'}
-          </Text>
-          {!items[currentIndex].isActive && (
+        {items[currentIndex].isActive ? (
+          <TouchableOpacity 
+            style={[styles.unlockButton, styles.setButton]} 
+            onPress={handleSet}>
+            <Text style={styles.unlockText}>Set</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.unlockButton}>
+            <Text style={styles.unlockText}>Unlock</Text>
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>{items[currentIndex].price}</Text>
-              <Icon name="water" size={32} color="#FFD700" />
+              <Text style={styles.dropIcon}>💧</Text>
             </View>
-          )}
-        </TouchableOpacity>
+          </TouchableOpacity>
+        )}
       </View>
     </PlainLayout>
   );
@@ -194,5 +201,9 @@ const styles = StyleSheet.create({
   },
   dropIcon: {
     fontSize: 18,
+  },
+  setButton: {
+    paddingHorizontal: 40, // Wider padding for "Set" button
+    backgroundColor: '#0096FF', // Different color for "Set" button
   },
 });
