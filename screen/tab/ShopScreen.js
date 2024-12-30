@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+} from 'react-native';
 import React, {useState} from 'react';
 import PlainLayout from '../../components/Layout/PlainLayout';
 import Header from '../../components/UI/Header';
@@ -23,10 +30,7 @@ const ShopScreen = () => {
 
   const TabButton = ({title}) => (
     <TouchableOpacity
-      style={[
-        styles.tabButton,
-        activeTab === title && styles.activeTabButton,
-      ]}
+      style={[styles.tabButton, activeTab === title && styles.activeTabButton]}
       onPress={() => {
         setActiveTab(title);
         setCurrentIndex(0);
@@ -40,8 +44,8 @@ const ShopScreen = () => {
       <Header title="Shop" />
       <View style={styles.container}>
         <Text style={styles.description}>
-          Dive deeper into the adventure by unlocking stunning backgrounds, unique
-          fish, and exclusive card designs
+          Dive deeper into the adventure by unlocking stunning backgrounds,
+          unique fish, and exclusive card designs
         </Text>
 
         <View style={styles.tabContainer}>
@@ -78,7 +82,7 @@ const ShopScreen = () => {
           {!items[currentIndex].isActive && (
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>{items[currentIndex].price}</Text>
-             <Icon name="water" size={32} color="#FFD700" />
+              <Icon name="water" size={32} color="#FFD700" />
             </View>
           )}
         </TouchableOpacity>
@@ -104,17 +108,21 @@ const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 20,
+    gap: 1,
     marginBottom: 30,
+    backgroundColor: '#00BFFF' + 70,
+    borderRadius: 12,
   },
   tabButton: {
     paddingHorizontal: 30,
     paddingVertical: 12,
     borderRadius: 25,
-    backgroundColor: '#0096FF',
+    // backgroundColor: '#00BFFF' + 70,
+    flex: 1,
   },
   activeTabButton: {
-    backgroundColor: '#00BFFF',
+    // backgroundColor: '#00BFFF',
+    backgroundColor: '#0096FF',
   },
   tabText: {
     color: 'white',
