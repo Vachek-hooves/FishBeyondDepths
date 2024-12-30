@@ -4,6 +4,8 @@ import GameLayout from '../../components/Layout/GameLayout';
 import {HomeIconNavigation} from '../../components/UI';
 import PlainLayout from '../../components/Layout/PlainLayout';
 import Header from '../../components/UI/Header';
+import { FISHES } from '../../data/fishes';
+import { backgrounds } from '../../data/backgrounds';
 
 const ShopScreen = () => {
   return (
