@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '15%',
     left: '50%',
-    transform: [{translateX: -140}],
+    transform: [{translateX: -100}],
     // transform: [{translateX: -(width / 2) + 'px'}],
     zIndex: 2,
     letterSpacing: 4,
