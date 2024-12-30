@@ -16,6 +16,7 @@ import {
 import CoralIcon from '../../components/UI/CoralIcon';
 import Header from '../../components/UI/Header';
 import PlainLayout from '../../components/Layout/PlainLayout';
+import ReturnBtn from '../../components/Icons/ReturnBtn';
 
 const CELL_SIZE = Dimensions.get('window').width / 5;
 
@@ -134,6 +135,7 @@ const PlayGameScreen = ({route, navigation}) => {
           </PanGestureHandler>
         </GestureHandlerRootView>
       </View>
+      <ReturnBtn />
     </PlainLayout>
   );
 };
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   gameBoard: {
-    width: CELL_SIZE * 4,
+    width: CELL_SIZE * 5,
     alignSelf: 'center',
   },
   row: {
