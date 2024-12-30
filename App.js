@@ -17,8 +17,8 @@ function App() {
           }}>
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
-          <Stack.Screen name="PlayGameScreen" component={PlayGameScreen} />
           <Stack.Screen name="LevelsScreen" component={LevelsScreen} />
+          <Stack.Screen name="PlayGameScreen" component={PlayGameScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>
