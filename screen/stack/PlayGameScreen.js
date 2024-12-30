@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   target: {
     width: CELL_SIZE * 0.8,
     height: CELL_SIZE * 0.8,
-    backgroundColor: '#0096FF',
+    backgroundColor: '#0096FF'+50,
     borderRadius: 12,
     position: 'absolute',
   },
