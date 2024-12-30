@@ -8,8 +8,12 @@ const InfoScreen = () => {
     <PlainLayout>
       <Header title={'About'} />
       <ScrollView>
-        {info.map(text => {
-          return <Text style={styles.title}>{text.text}</Text>;
+        {info.map((text, index) => {
+          return (
+            <Text key={index} style={styles.title}>
+              {text.text}
+            </Text>
+          );
         })}
       </ScrollView>
     </PlainLayout>
