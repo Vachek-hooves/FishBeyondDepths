@@ -5,6 +5,7 @@ import CustomLockIcon from '../../components/Icons/CustomLockIcon';
 import {labirinth} from '../../data/labirinth';
 import PlainLayout from '../../components/Layout/PlainLayout';
 import Header from '../../components/UI/Header';
+import ReturnBtn from '../../components/Icons/ReturnBtn';
 
 const LevelButton = ({level, onPress, isActive}) => (
   <TouchableOpacity
@@ -41,6 +42,7 @@ const LevelsScreen = ({navigation}) => {
           ))}
         </View>
       </View>
+      <ReturnBtn />
     </PlainLayout>
   );
 };
