@@ -1,6 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {HomeScreen, InfoScreen, ShopScreen} from '../screen/tab';
+import {
+  HomeScreen,
+  InfoScreen,
+  SettingsScreen,
+  ShopScreen,
+} from '../screen/tab';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,8 +20,9 @@ const TabNavigator = () => {
           tabBarItemStyle: {display: 'none'}, // This removes the space in the tab bar
         }}
       />
-      <Tab.Screen name="InfoScreen" component={InfoScreen} />
       <Tab.Screen name="ShopScreen" component={ShopScreen} />
+      <Tab.Screen name="InfoScreen" component={InfoScreen} />
+      <Tab.Screen name="SettingsScreen" component={SettingsScreen} />
     </Tab.Navigator>
   );
 };
