@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     position: 'absolute',
-    top: '8%',
+    top: '6%',
   },
   title: {
     fontSize: 28,
