@@ -1,3 +1,3 @@
 import WelcomeScreen from './WelcomeScreen';
-
-export {WelcomeScreen};
+import PlayGameScreen from './PlayGameScreen';
+export {WelcomeScreen, PlayGameScreen};

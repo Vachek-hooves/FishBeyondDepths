@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {ContextProvider} from './store/context';
-import {WelcomeScreen} from './screen/stack';
+import {PlayGameScreen, WelcomeScreen} from './screen/stack';
 import TabNavigator from './TabNavigation/TabNavigator';
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +17,7 @@ function App() {
           }}>
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen name="PlayGameScreen" component={PlayGameScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>

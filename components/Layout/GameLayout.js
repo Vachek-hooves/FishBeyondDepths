@@ -46,6 +46,8 @@ const styles = StyleSheet.create({
   contentLayer: {
     flex: 1,
     zIndex: 2,
+    justifyContent: 'center',
+    textAlign: 'center',
   },
   title: {
     fontSize: 42,
