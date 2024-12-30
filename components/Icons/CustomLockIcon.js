@@ -4,7 +4,7 @@ const CustomLockIcon = () => {
   return (
     <Image
       source={require('../../assets/images/ui/lockVector.png')}
-      style={{width: 60, height: 60}}
+      style={{width: 40, height: 50}}
     />
   );
 };
