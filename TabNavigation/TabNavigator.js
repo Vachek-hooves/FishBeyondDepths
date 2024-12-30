@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
@@ -10,23 +10,41 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
+const CustomTabIcon = ({name, focused}) => (
+  <View style={[
+    styles.iconContainer,
+    focused && styles.iconContainerActive
+  ]}>
+    <Icon 
+      name={name} 
+      color="#FFD700" 
+      size={32} 
+    />
+  </View>
+);
+
 const TabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator 
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: styles.tabBar,
+        tabBarShowLabel: false,
+      }}>
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{
           tabBarButton: () => null,
-          tabBarItemStyle: {display: 'none'}, // This removes the space in the tab bar
+          tabBarItemStyle: {display: 'none'},
         }}
       />
       <Tab.Screen
         name="ShopScreen"
         component={ShopScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
-            <Icon name="cart" color={color} size={size} />
+          tabBarIcon: ({focused}) => (
+            <CustomTabIcon name="cart" focused={focused} />
           ),
         }}
       />
@@ -34,8 +52,8 @@ const TabNavigator = () => {
         name="InfoScreen"
         component={InfoScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
-            <Icon name="information-circle" color={color} size={size} />
+          tabBarIcon: ({focused}) => (
+            <CustomTabIcon name="information-circle" focused={focused} />
           ),
         }}
       />
@@ -43,8 +61,8 @@ const TabNavigator = () => {
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
-            <Icon name="settings" color={color} size={size} />
+          tabBarIcon: ({focused}) => (
+            <CustomTabIcon name="settings" focused={focused} />
           ),
         }}
       />
@@ -54,4 +72,36 @@ const TabNavigator = () => {
 
 export default TabNavigator;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tabBar: {
+    position: 'absolute',
+    borderTopWidth: 0,
+    elevation: 0,
+    height: 90,
+    paddingBottom: 8,
+    paddingTop: 8,
+    backgroundColor: 'transparent',
+  },
+  iconContainer: {
+    backgroundColor: '#0096FF',
+    width: 65,
+    height: 65,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#0096FF',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  iconContainerActive: {
+    backgroundColor: '#00BFFF',
+    shadowColor: '#00BFFF',
+    shadowOpacity: 0.8,
+    shadowRadius: 8,
+  },
+});
