@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: '#FFD700',
     textAlign: 'center',
-    marginTop: 60,
+    marginTop: 150,
     fontWeight: '600',
     textShadowColor: 'rgba(255, 215, 0, 0.5)',
     textShadowOffset: {width: 0, height: 0},
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   topFish: {
     position: 'absolute',
-    top: '20%',
+    top: '5%',
     right: '0%',
     transform: [{rotate: '-5deg'}],
   },
