@@ -5,7 +5,7 @@ const BlueFish = () => {
   return (
     <Image
       source={require('../../assets/images/ui/fish.png')}
-      style={{width: '70%', height: '25%'}}
+      style={{width: 300, height:210}}
     />
   );
 };
