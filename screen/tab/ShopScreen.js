@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import GameLayout from '../../components/Layout/GameLayout';
+import {HomeIconNavigation} from '../../components/UI';
 
 const ShopScreen = () => {
   return (
-    <View>
-      <Text>ShopScreen</Text>
-    </View>
-  )
-}
+    <GameLayout>
+      <HomeIconNavigation />
+    </GameLayout>
+  );
+};
 
-export default ShopScreen
+export default ShopScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

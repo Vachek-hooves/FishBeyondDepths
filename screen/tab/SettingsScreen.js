@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import GameLayout from '../../components/Layout/GameLayout';
+import {HomeIconNavigation} from '../../components/UI';
 
 const SettingsScreen = () => {
   return (
-    <View>
-      <Text>SettingsScreen</Text>
-    </View>
-  )
-}
+    <GameLayout>
+      <HomeIconNavigation />
+    </GameLayout>
+  );
+};
 
-export default SettingsScreen
+export default SettingsScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

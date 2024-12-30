@@ -1,13 +1,15 @@
-import {StyleSheet, Text, View,Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React from 'react';
 import TabLayout from './TabLayout';
-import {BlueFish} from '../UI';
+import {BlueFish, HomeIconNavigation} from '../UI';
 
 const {width, height} = Dimensions.get('window');
+
 const GameLayout = ({children}) => {
   return (
     <TabLayout style={styles.container}>
       {/* Background Layer */}
+      {/* <HomeIconNavigation /> */}
       <View style={styles.backgroundLayer}>
         <Text style={styles.title}>Fish Beyond{'\n'}the Depths</Text>
         <View style={styles.fishContainer}>
@@ -19,11 +21,9 @@ const GameLayout = ({children}) => {
           </View>
         </View>
       </View>
-      
+
       {/* Content Layer */}
-      <View style={styles.contentLayer}>
-        {children}
-      </View>
+      <View style={styles.contentLayer}>{children}</View>
     </TabLayout>
   );
 };
@@ -58,11 +58,13 @@ const styles = StyleSheet.create({
     textShadowRadius: 10,
     position: 'absolute',
     top: '15%',
-    left: '50%',
-    transform: [{translateX: -100}],
+    // left: '50%',
+    // transform: [{translateX: -100}],
     // transform: [{translateX: -(width / 2) + 'px'}],
     zIndex: 2,
     letterSpacing: 4,
+    justifyContent: 'center',
+    width: '100%',
   },
   fishContainer: {
     flex: 1,

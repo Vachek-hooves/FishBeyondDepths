@@ -1,3 +1,3 @@
 import BlueFish from './BlueFish';
-
-export {BlueFish};
+import HomeIconNavigation from './HomeIconNavigation';
+export {BlueFish, HomeIconNavigation};

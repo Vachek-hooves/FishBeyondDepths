@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import GameLayout from '../../components/Layout/GameLayout';
+import {HomeIconNavigation} from '../../components/UI';
 
 const InfoScreen = () => {
   return (
-    <View>
-      <Text>InfoScreen</Text>
-    </View>
-  )
-}
+    <GameLayout>
+      <HomeIconNavigation />
+    </GameLayout>
+  );
+};
 
-export default InfoScreen
+export default InfoScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
