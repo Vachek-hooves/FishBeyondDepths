@@ -6,7 +6,7 @@ import NavButton from '../../components/UI/NavButton';
 const HomeScreen = () => {
   return (
     <GameLayout>
-      <NavButton text={'Play'} screen={'PlayGameScreen'} />
+      <NavButton text={'Play'} screen={'LevelsScreen'} />
     </GameLayout>
   );
 };
