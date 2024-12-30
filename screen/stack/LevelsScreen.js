@@ -3,7 +3,7 @@ import React from 'react';
 import PlainLayout from '../../components/Layout/PlainLayout';
 import Header from '../../components/UI/Header';
 import CustomLockIcon from '../../components/Icons/CustomLockIcon';
-
+import {labirinth} from '../../data/labirinth';
 const LevelsScreen = () => {
   return (
     <PlainLayout>

@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import PlainLayout from '../../components/Layout/PlainLayout';
 import Header from '../../components/UI/Header';
+import {labirinth} from '../../data/labirinth';
 
 const PlayGameScreen = () => {
   return (
