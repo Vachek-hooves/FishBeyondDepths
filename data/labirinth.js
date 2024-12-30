@@ -53,7 +53,7 @@ export const labirinth = [
     level: 1,
     rows: 4,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 3, col: 3},
     corals: [
@@ -80,7 +80,7 @@ export const labirinth = [
     level: 1,
     rows: 4,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 3, col: 3},
     corals: [
@@ -107,7 +107,7 @@ export const labirinth = [
     level: 1,
     rows: 4,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 2, col: 3},
     corals: [
@@ -134,7 +134,7 @@ export const labirinth = [
     level: 2,
     rows: 5,
     cols: 3,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 2, col: 2},
     corals: [
@@ -160,7 +160,7 @@ export const labirinth = [
     level: 2,
     rows: 5,
     cols: 3,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 4, col: 2},
     corals: [
@@ -186,7 +186,7 @@ export const labirinth = [
     level: 2,
     rows: 5,
     cols: 3,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 4, col: 2},
     corals: [
@@ -212,7 +212,7 @@ export const labirinth = [
     level: 2,
     rows: 5,
     cols: 3,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 4, col: 2},
     corals: [
@@ -238,7 +238,7 @@ export const labirinth = [
     level: 2,
     rows: 5,
     cols: 3,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 2},
     target: {row: 3, col: 0},
     corals: [
@@ -265,7 +265,7 @@ export const labirinth = [
     level: 3,
     rows: 5,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 0, col: 2},
     corals: [
@@ -296,7 +296,7 @@ export const labirinth = [
     level: 3,
     rows: 5,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 4, col: 3},
     target: {row: 1, col: 3},
     corals: [
@@ -327,7 +327,7 @@ export const labirinth = [
     level: 3,
     rows: 5,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 4, col: 2},
     target: {row: 1, col: 0},
     corals: [
@@ -358,7 +358,7 @@ export const labirinth = [
     level: 3,
     rows: 5,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 3, col: 1},
     target: {row: 1, col: 1},
     corals: [
@@ -390,7 +390,7 @@ export const labirinth = [
     level: 3,
     rows: 5,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 1, col: 2},
     corals: [
@@ -421,7 +421,7 @@ export const labirinth = [
     level: 4,
     rows: 6,
     cols: 4,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 1, col: 2},
     target: {row: 0, col: 0},
     corals: [
@@ -456,7 +456,7 @@ export const labirinth = [
     level: 4,
     rows: 5,
     cols: 5,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 0},
     target: {row: 1, col: 4},
     corals: [
@@ -487,7 +487,7 @@ export const labirinth = [
     level: 4,
     rows: 5,
     cols: 5,
-    isActive: true,
+        isActive: false,
     startPosition: {row: 4, col: 4},
     target: {row: 2, col: 2},
     corals: [
@@ -535,7 +535,7 @@ export const labirinth = [
     level: 4,
     rows: 5,
     cols: 5,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 4},
     target: {row: 4, col: 2},
     corals: [
@@ -583,7 +583,7 @@ export const labirinth = [
     level: 4,
     rows: 5,
     cols: 5,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 0, col: 3},
     target: {row: 2, col: 2},
     corals: [
@@ -631,7 +631,7 @@ export const labirinth = [
     level: 5,
     rows: 6,
     cols: 5,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 5, col: 4},
     target: {row: 1, col: 2},
     corals: [
@@ -682,7 +682,7 @@ export const labirinth = [
     level: 5,
     rows: 6,
     cols: 5,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 5, col: 1},
     target: {row: 2, col: 4},
     corals: [
@@ -730,7 +730,7 @@ export const labirinth = [
     level: 5,
     rows: 6,
     cols: 5,
-    isActive: true,
+    isActive: false, 
     startPosition: {row: 5, col: 0},
     target: {row: 0, col: 0},
     corals: [
@@ -783,7 +783,7 @@ export const labirinth = [
     level: 5,
     rows: 6,
     cols: 5,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 5, col: 4},
     target: {row: 2, col: 2},
     corals: [
@@ -833,7 +833,7 @@ export const labirinth = [
     level: 5,
     rows: 6,
     cols: 5,
-    isActive: true,
+    isActive: false,
     startPosition: {row: 5, col: 0},
     target: {row: 1, col: 0},
     corals: [
