@@ -7,16 +7,17 @@ import {
   Image,
 } from 'react-native';
 import React, {useState} from 'react';
-import GameLayout from '../../components/Layout/GameLayout';
 import {
   GestureHandlerRootView,
   PanGestureHandler,
   State,
 } from 'react-native-gesture-handler';
-import CoralIcon from '../../components/UI/CoralIcon';
-import Header from '../../components/UI/Header';
 import PlainLayout from '../../components/Layout/PlainLayout';
+import Header from '../../components/UI/Header';
+import {useAppContext} from '../../store/context';
+import CoralIcon from '../../components/UI/CoralIcon';
 import ReturnBtn from '../../components/Icons/ReturnBtn';
+import LevelCompleteModal from '../../components/UI/LevelCompleteModal';
 
 const CELL_SIZE = Dimensions.get('window').width / 5;
 
@@ -24,12 +25,13 @@ const PlayGameScreen = ({route, navigation}) => {
   const {levelData} = route.params;
   const [fishPosition, setFishPosition] = useState(levelData.startPosition);
   const [gameState, setGameState] = useState('playing');
+  const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const {completeLevel} = useAppContext();
 
   const onGestureEvent = ({nativeEvent}) => {
     if (nativeEvent.state === State.END) {
       const {translationX, translationY} = nativeEvent;
 
-      // Determine the dominant direction
       if (Math.abs(translationX) > Math.abs(translationY)) {
         if (translationX > 0) {
           tryMove('right');
@@ -47,7 +49,8 @@ const PlayGameScreen = ({route, navigation}) => {
   };
 
   const tryMove = direction => {
-    console.log('Moving:', direction); // Debug log
+    if (gameState !== 'playing') return;
+
     const newPosition = {...fishPosition};
 
     switch (direction) {
@@ -66,15 +69,8 @@ const PlayGameScreen = ({route, navigation}) => {
     }
 
     if (isValidMove(newPosition)) {
-      console.log('Valid move to:', newPosition); // Debug log
       setFishPosition(newPosition);
-
-      if (
-        newPosition.row === levelData.target.row &&
-        newPosition.col === levelData.target.col
-      ) {
-        setGameState('won');
-      }
+      checkWinCondition(newPosition);
     }
   };
 
@@ -93,6 +89,41 @@ const PlayGameScreen = ({route, navigation}) => {
     return !levelData.corals.some(
       coral => coral.row === position.row && coral.col === position.col,
     );
+  };
+
+  const checkWinCondition = position => {
+    if (
+      position.row === levelData.target.row &&
+      position.col === levelData.target.col
+    ) {
+      setGameState('won');
+      completeLevel(levelData.id);
+      setShowCompleteModal(true);
+      // Optional: Show success message or animation
+      // setTimeout(() => {
+      //   navigation.goBack();
+      // }, 1000);
+    }
+  };
+
+  const handleNextLevel = () => {
+    setShowCompleteModal(false);
+    navigation.replace('PlayGameScreen', {
+      levelData: {
+        ...levelData,
+        id: levelData.id + 1,
+      },
+    });
+  };
+
+  const handleMainMenu = () => {
+    setShowCompleteModal(false);
+    navigation.navigate('TabNavigator');
+  };
+
+  const handleLevelsScreen = () => {
+    setShowCompleteModal(false);
+    navigation.navigate('LevelsScreen');
   };
 
   return (
@@ -136,6 +167,13 @@ const PlayGameScreen = ({route, navigation}) => {
         </GestureHandlerRootView>
       </View>
       <ReturnBtn />
+      <LevelCompleteModal
+        visible={showCompleteModal}
+        score={30}
+        // onNextLevel={handleNextLevel}
+        onMainMenu={handleMainMenu}
+        onNextLevel={handleLevelsScreen}
+      />
     </PlainLayout>
   );
 };
@@ -197,7 +235,7 @@ const styles = StyleSheet.create({
   target: {
     width: CELL_SIZE * 0.8,
     height: CELL_SIZE * 0.8,
-    backgroundColor: '#0096FF'+50,
+    backgroundColor: '#0096FF' + 50,
     borderRadius: 12,
     position: 'absolute',
   },

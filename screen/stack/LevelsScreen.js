@@ -6,6 +6,7 @@ import {labirinth} from '../../data/labirinth';
 import PlainLayout from '../../components/Layout/PlainLayout';
 import Header from '../../components/UI/Header';
 import ReturnBtn from '../../components/Icons/ReturnBtn';
+import {useAppContext} from '../../store/context';
 
 const LevelButton = ({level, onPress, isActive}) => (
   <TouchableOpacity
@@ -21,10 +22,28 @@ const LevelButton = ({level, onPress, isActive}) => (
 );
 
 const LevelsScreen = ({navigation}) => {
-  const handleLevelPress = level => {
-    navigation.navigate('PlayGameScreen', {
-      levelData: level,
-    });
+  const {isLevelUnlocked} = useAppContext();
+
+  const renderLevelButton = (level) => {
+    const isUnlocked = isLevelUnlocked(level.id);
+
+    return (
+      <TouchableOpacity 
+        key={level.id}
+        style={styles.levelButton}
+        onPress={() => {
+          if (isUnlocked) {
+            navigation.navigate('PlayGameScreen', {levelData: level});
+          }
+        }}
+        disabled={!isUnlocked}>
+        {isUnlocked ? (
+          <Text style={styles.levelNumber}>{level.id}</Text>
+        ) : (
+          <CustomLockIcon />
+        )}
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -32,14 +51,7 @@ const LevelsScreen = ({navigation}) => {
       <Header title={'Levels'} />
       <View style={styles.container}>
         <View style={styles.levelsGrid}>
-          {labirinth.map(level => (
-            <LevelButton
-              key={level.id}
-              level={level}
-              isActive={level.isActive}
-              onPress={() => handleLevelPress(level)}
-            />
-          ))}
+          {labirinth.map(level => renderLevelButton(level))}
         </View>
       </View>
       <ReturnBtn />
