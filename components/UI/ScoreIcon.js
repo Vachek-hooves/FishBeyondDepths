@@ -1,17 +1,20 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useAppContext} from '../../store/context';
 
 const ScoreIcon = () => {
+  const {totalScore} = useAppContext();
+  // console.log(totalScore,'ScoreIcon')
   return (
     <View style={styles.iconContainer}>
-      <Text style={styles.score}>{10}</Text>
+      <Text style={styles.score}>{totalScore}</Text>
       <Icon name="water" size={32} color="#FFD700" />
     </View>
   );
 };
 
-export default ScoreIcon
+export default ScoreIcon;
 
 const styles = StyleSheet.create({
   iconContainer: {
