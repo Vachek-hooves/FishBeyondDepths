@@ -16,6 +16,8 @@ export const ContextProvider = ({children}) => {
     backgrounds: {1: true}, // First background is free
     fishes: {1: true}, // First fish is free
   });
+  const [isMusicEnabled, setIsMusicEnabled] = useState(true);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
   console.log(unlockedLevels)
 
   // Load saved data when app starts
@@ -46,6 +48,8 @@ export const ContextProvider = ({children}) => {
           selectedFish: savedFish,
           unlockedLevels: savedUnlockedLevels,
           unlockedItems: savedUnlockedItems,
+          isMusicEnabled: savedMusicEnabled,
+          isSoundEnabled: savedSoundEnabled,
         } = JSON.parse(savedData);
 
         setTotalScore(savedScore || 0);
@@ -57,6 +61,8 @@ export const ContextProvider = ({children}) => {
           backgrounds: {1: true},
           fishes: {1: true},
         });
+        setIsMusicEnabled(savedMusicEnabled ?? true);
+        setIsSoundEnabled(savedSoundEnabled ?? true);
       }
     } catch (error) {
       console.error('Error loading saved data:', error);
@@ -72,6 +78,8 @@ export const ContextProvider = ({children}) => {
         selectedFish,
         unlockedLevels,
         unlockedItems,
+        isMusicEnabled,
+        isSoundEnabled,
       };
       await AsyncStorage.setItem('gameData', JSON.stringify(dataToSave));
     } catch (error) {
@@ -174,6 +182,10 @@ export const ContextProvider = ({children}) => {
     getActiveItems,
     getLevelScore,
     isLevelUnlocked,
+    isMusicEnabled,
+    setIsMusicEnabled,
+    isSoundEnabled,
+    setIsSoundEnabled,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

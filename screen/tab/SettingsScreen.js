@@ -1,7 +1,9 @@
 import {StyleSheet, Text, View, Switch} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import PlainLayout from '../../components/Layout/PlainLayout';
 import Header from '../../components/UI/Header';
+import {useAppContext} from '../../store/context';
+import {playBackgroundMusic, pauseBackgroundMusic} from '../../config/setSound';
 
 const SettingItem = ({title, value, onValueChange}) => {
   return (
@@ -20,8 +22,17 @@ const SettingItem = ({title, value, onValueChange}) => {
 };
 
 const SettingsScreen = () => {
-  const [isMusicEnabled, setIsMusicEnabled] = useState(true);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+  const {isMusicEnabled, setIsMusicEnabled, isSoundEnabled, setIsSoundEnabled} =
+    useAppContext();
+
+  const handleMusicToggle = async value => {
+    setIsMusicEnabled(value);
+    if (value) {
+      await playBackgroundMusic();
+    } else {
+      pauseBackgroundMusic();
+    }
+  };
 
   return (
     <PlainLayout>
@@ -30,7 +41,7 @@ const SettingsScreen = () => {
         <SettingItem
           title="Background Music"
           value={isMusicEnabled}
-          onValueChange={setIsMusicEnabled}
+          onValueChange={handleMusicToggle}
         />
         <SettingItem
           title="Sounds"

@@ -14,6 +14,7 @@ import {
   setupPlayer,
   toggleBackgroundMusic,
 } from '../config/setSound';
+import {useAppContext} from '../store/context';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,20 +25,24 @@ const CustomTabIcon = ({name, focused}) => (
 );
 
 const TabNavigator = () => {
+  const {isMusicEnabled} = useAppContext();
   const [isPlayMusic, setIsPlayMusic] = useState(false);
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
-      if (nextAppState === 'active' && isPlayMusic) {
+      if (nextAppState === 'active' && isPlayMusic && isMusicEnabled) {
         playBackgroundMusic();
       } else if (nextAppState === 'inactive' || nextAppState === 'background') {
         pauseBackgroundMusic();
       }
     });
+
     const initMusic = async () => {
       await setupPlayer();
-      await playBackgroundMusic();
-      setIsPlayMusic(true);
+      if (isMusicEnabled) {
+        await playBackgroundMusic();
+        setIsPlayMusic(true);
+      }
     };
     initMusic();
 
@@ -45,7 +50,7 @@ const TabNavigator = () => {
       subscription.remove();
       pauseBackgroundMusic();
     };
-  }, []);
+  }, [isMusicEnabled]);
 
   return (
     <Tab.Navigator
