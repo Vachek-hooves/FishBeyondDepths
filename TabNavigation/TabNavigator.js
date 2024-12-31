@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {AppState, StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeScreen,
@@ -7,25 +7,48 @@ import {
   ShopScreen,
 } from '../screen/tab';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useState, useEffect} from 'react';
+import {
+  pauseBackgroundMusic,
+  playBackgroundMusic,
+  setupPlayer,
+  toggleBackgroundMusic,
+} from '../config/setSound';
 
 const Tab = createBottomTabNavigator();
 
 const CustomTabIcon = ({name, focused}) => (
-  <View style={[
-    styles.iconContainer,
-    focused && styles.iconContainerActive
-  ]}>
-    <Icon 
-      name={name} 
-      color="#FFD700" 
-      size={32} 
-    />
+  <View style={[styles.iconContainer, focused && styles.iconContainerActive]}>
+    <Icon name={name} color="#FFD700" size={32} />
   </View>
 );
 
 const TabNavigator = () => {
+  const [isPlayMusic, setIsPlayMusic] = useState(false);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (nextAppState === 'active' && isPlayMusic) {
+        playBackgroundMusic();
+      } else if (nextAppState === 'inactive' || nextAppState === 'background') {
+        pauseBackgroundMusic();
+      }
+    });
+    const initMusic = async () => {
+      await setupPlayer();
+      await playBackgroundMusic();
+      setIsPlayMusic(true);
+    };
+    initMusic();
+
+    return () => {
+      subscription.remove();
+      pauseBackgroundMusic();
+    };
+  }, []);
+
   return (
-    <Tab.Navigator 
+    <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBar,
@@ -83,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   iconContainer: {
-    backgroundColor: '#0096FF'+90,
+    backgroundColor: '#0096FF' + 90,
     width: 65,
     height: 65,
     borderRadius: 12,

@@ -10,7 +10,7 @@ export const setupPlayer = () => {
   
   return new Promise((resolve, reject) => {
     backgroundMusic = new Sound(
-      require('../../assets/sound/Music/vegasNights.mp3'), 
+      require('../assets/sound/fishin_bg_music.wav'), 
       (error) => {
         if (error) {
           console.error('Failed to load sound', error);
