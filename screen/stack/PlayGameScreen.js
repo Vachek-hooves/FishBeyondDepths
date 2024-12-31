@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   GestureHandlerRootView,
   PanGestureHandler,
@@ -18,16 +18,60 @@ import {useAppContext} from '../../store/context';
 import CoralIcon from '../../components/UI/CoralIcon';
 import ReturnBtn from '../../components/Icons/ReturnBtn';
 import LevelCompleteModal from '../../components/UI/LevelCompleteModal';
+import Sound from 'react-native-sound';
 
 const CELL_SIZE = Dimensions.get('window').width / 5;
+
+Sound.setCategory('Playback');
+// const successSound = new Sound(
+//   '../../assets/sound/correct_sound.wav',
+//   Sound.MAIN_BUNDLE,
+//   error => {
+//     if (error) {
+//       console.log('Failed to load sound', error);
+//     }
+//   },
+// );
 
 const PlayGameScreen = ({route, navigation}) => {
   const {levelData} = route.params;
   const [fishPosition, setFishPosition] = useState(levelData.startPosition);
   const [gameState, setGameState] = useState('playing');
   const [showCompleteModal, setShowCompleteModal] = useState(false);
-  const {completeLevel, getActiveItems} = useAppContext();
+  const [successSound, setSuccessSound] = useState(null);
+  const {completeLevel, getActiveItems, isSoundEnabled} = useAppContext();
   const {fish} = getActiveItems();
+
+  useEffect(() => {
+    const sound = new Sound(
+      require('../../assets/sound/correct_sound.wav'), // Direct require
+      error => {
+        if (error) {
+          console.log('Failed to load sound', error);
+          return;
+        }
+        // Loaded successfully
+        setSuccessSound(sound);
+      },
+    );
+
+    return () => {
+      if (sound) {
+        sound.release();
+      }
+    };
+  }, []);
+
+  const playSuccessSound = () => {
+    if (isSoundEnabled && successSound) {
+      successSound.stop(); // Stop any currently playing instance
+      successSound.play(success => {
+        if (!success) {
+          console.log('Sound playback failed');
+        }
+      });
+    }
+  };
 
   const onGestureEvent = ({nativeEvent}) => {
     if (nativeEvent.state === State.END) {
@@ -97,6 +141,7 @@ const PlayGameScreen = ({route, navigation}) => {
       position.row === levelData.target.row &&
       position.col === levelData.target.col
     ) {
+      playSuccessSound(); // Play success sound
       setGameState('won');
       completeLevel(levelData.id);
       setShowCompleteModal(true);
@@ -154,10 +199,7 @@ const PlayGameScreen = ({route, navigation}) => {
                           ) && <CoralIcon />}
                           {fishPosition.row === rowIndex &&
                             fishPosition.col === colIndex && (
-                              <Image
-                                source={fish}
-                                style={styles.fish}
-                              />
+                              <Image source={fish} style={styles.fish} />
                             )}
                         </View>
                       ))}
