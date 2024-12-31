@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   iconContainer: {
-    backgroundColor: '#0096FF',
+    backgroundColor: '#0096FF'+90,
     width: 65,
     height: 65,
     borderRadius: 12,

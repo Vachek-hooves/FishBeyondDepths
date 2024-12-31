@@ -55,53 +55,11 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: 'center',
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 30,
-  },
-  homeButton: {
-    width: 45,
-    height: 45,
-    backgroundColor: '#0096FF',
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#0096FF',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-  },
-  homeIcon: {
-    fontSize: 24,
-  },
-  title: {
-    fontSize: 24,
-    color: 'white',
-    fontWeight: '600',
-  },
-  scoreContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#0096FF',
-    borderRadius: 20,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-  },
-  scoreText: {
-    color: '#FFD700',
-    fontSize: 18,
-    marginRight: 4,
-  },
-  scoreIcon: {
-    fontSize: 18,
-  },
   levelsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    gap: 12,
+    gap: 10,
   },
   levelButton: {
     width: 60,
@@ -114,6 +72,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 0.5,
     shadowRadius: 5,
+    marginVertical:5
   },
   levelNumber: {
     color: '#FFD700',

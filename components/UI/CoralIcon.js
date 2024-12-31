@@ -8,7 +8,7 @@ export default CoralIcon;
 
 const styles = StyleSheet.create({
   icon: {
-    width: 50,
-    height: 50,
+    width: 65,
+    height: 65,
   },
 });
