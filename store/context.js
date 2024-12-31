@@ -1,8 +1,8 @@
 import {createContext, useContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {labirinth} from '../data/labirinth'; // Import labirinth data
-import { backgrounds } from '../data/backgrounds';
-import { FISHES } from '../data/fishes';
+import {backgrounds} from '../data/backgrounds';
+import {FISHES} from '../data/fishes';
+import { labirinth } from '../data/labirinth';
 
 export const AppContext = createContext({});
 
@@ -11,13 +11,12 @@ export const ContextProvider = ({children}) => {
   const [completedLevels, setCompletedLevels] = useState({});
   const [selectedBackground, setSelectedBackground] = useState(1);
   const [selectedFish, setSelectedFish] = useState(1);
-  const [unlockedLevels, setUnlockedLevels] = useState({1: true}); // Level 1 starts unlocked
-  console.group(
-    // completedLevels,
-    selectedBackground,
-    selectedFish,
-    // unlockedLevels,
-  );
+  const [unlockedLevels, setUnlockedLevels] = useState({1: true});
+  const [unlockedItems, setUnlockedItems] = useState({
+    backgrounds: {1: true}, // First background is free
+    fishes: {1: true}, // First fish is free
+  });
+  console.log(unlockedLevels)
 
   // Load saved data when app starts
   useEffect(() => {
@@ -33,6 +32,7 @@ export const ContextProvider = ({children}) => {
     selectedBackground,
     selectedFish,
     unlockedLevels,
+    unlockedItems,
   ]);
 
   const loadSavedData = async () => {
@@ -45,6 +45,7 @@ export const ContextProvider = ({children}) => {
           selectedBackground: savedBg,
           selectedFish: savedFish,
           unlockedLevels: savedUnlockedLevels,
+          unlockedItems: savedUnlockedItems,
         } = JSON.parse(savedData);
 
         setTotalScore(savedScore || 0);
@@ -52,6 +53,10 @@ export const ContextProvider = ({children}) => {
         setSelectedBackground(savedBg || 1);
         setSelectedFish(savedFish || 1);
         setUnlockedLevels(savedUnlockedLevels || {1: true});
+        setUnlockedItems(savedUnlockedItems || {
+          backgrounds: {1: true},
+          fishes: {1: true},
+        });
       }
     } catch (error) {
       console.error('Error loading saved data:', error);
@@ -66,12 +71,58 @@ export const ContextProvider = ({children}) => {
         selectedBackground,
         selectedFish,
         unlockedLevels,
+        unlockedItems,
       };
       await AsyncStorage.setItem('gameData', JSON.stringify(dataToSave));
     } catch (error) {
       console.error('Error saving data:', error);
     }
   };
+
+  // Purchase and unlock items
+  const purchaseItem = (type, itemId, price) => {
+    if (totalScore >= price) {
+      setTotalScore(prev => prev - price);
+      setUnlockedItems(prev => ({
+        ...prev,
+        [type]: {
+          ...prev[type],
+          [itemId]: true,
+        },
+      }));
+      return true;
+    }
+    return false;
+  };
+
+  // Check if item is unlocked
+  const isItemUnlocked = (type, itemId) => {
+    return unlockedItems[type]?.[itemId] || false;
+  };
+
+  // Set active background
+  const setBackground = backgroundId => {
+    if (isItemUnlocked('backgrounds', backgroundId)) {
+      setSelectedBackground(backgroundId);
+      return true;
+    }
+    return false;
+  };
+
+  // Set active fish
+  const setFish = fishId => {
+    if (isItemUnlocked('fishes', fishId)) {
+      setSelectedFish(fishId);
+      return true;
+    }
+    return false;
+  };
+
+  // Get current active items
+  const getActiveItems = () => ({
+    background: backgrounds.find(bg => bg.id === selectedBackground)?.image,
+    fish: FISHES.find(fish => fish.id === selectedFish)?.image,
+  });
 
   const completeLevel = levelId => {
     if (!completedLevels[levelId]) {
@@ -87,9 +138,11 @@ export const ContextProvider = ({children}) => {
       }));
       setTotalScore(prev => prev + levelScore);
 
-      // Unlock next level
+      // Unlock next level if it exists
       const nextLevelId = levelId + 1;
-      if (nextLevelId <= labirinth.length) {
+      const nextLevelExists = labirinth.some(level => level.id === nextLevelId);
+      
+      if (nextLevelExists) {
         setUnlockedLevels(prev => ({
           ...prev,
           [nextLevelId]: true,
@@ -102,14 +155,6 @@ export const ContextProvider = ({children}) => {
     return !!unlockedLevels[levelId];
   };
 
-  const setBackground = backgroundId => {
-    setSelectedBackground(backgroundId);
-  };
-
-  const setFish = fishId => {
-    setSelectedFish(fishId);
-  };
-
   const getLevelScore = levelId => {
     return completedLevels[levelId]?.score || 0;
   };
@@ -120,9 +165,13 @@ export const ContextProvider = ({children}) => {
     selectedBackground,
     selectedFish,
     unlockedLevels,
+    unlockedItems,
     completeLevel,
+    purchaseItem,
     setBackground,
     setFish,
+    isItemUnlocked,
+    getActiveItems,
     getLevelScore,
     isLevelUnlocked,
   };

@@ -26,7 +26,8 @@ const PlayGameScreen = ({route, navigation}) => {
   const [fishPosition, setFishPosition] = useState(levelData.startPosition);
   const [gameState, setGameState] = useState('playing');
   const [showCompleteModal, setShowCompleteModal] = useState(false);
-  const {completeLevel} = useAppContext();
+  const {completeLevel, getActiveItems} = useAppContext();
+  const {fish} = getActiveItems();
 
   const onGestureEvent = ({nativeEvent}) => {
     if (nativeEvent.state === State.END) {
@@ -154,7 +155,7 @@ const PlayGameScreen = ({route, navigation}) => {
                           {fishPosition.row === rowIndex &&
                             fishPosition.col === colIndex && (
                               <Image
-                                source={require('../../assets/images/fishes/fish1.png')}
+                                source={fish}
                                 style={styles.fish}
                               />
                             )}

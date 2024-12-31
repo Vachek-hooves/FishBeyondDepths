@@ -1,11 +1,13 @@
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import React from 'react';
+import {useAppContext} from '../../store/context';
 
 const PlainLayout = ({children}) => {
+  const {getActiveItems} = useAppContext();
+  const {background} = getActiveItems();
+
   return (
-    <ImageBackground
-      source={require('../../assets/images/bg/bg1.png')}
-      style={styles.container}>
+    <ImageBackground source={background} style={styles.container}>
       <View style={{height: 130}} />
       {children}
       <View style={{height: 120}} />

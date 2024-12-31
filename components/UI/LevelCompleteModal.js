@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Modal, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const LevelCompleteModal = ({visible, score, onNextLevel, onMainMenu}) => {
   return (
@@ -8,7 +9,8 @@ const LevelCompleteModal = ({visible, score, onNextLevel, onMainMenu}) => {
         <View style={styles.modalContent}>
           <View style={styles.scoreContainer}>
             <Text style={styles.scoreText}>30</Text>
-            <Text style={styles.dropIcon}>💧</Text>
+            {/* <Text style={styles.dropIcon}>💧</Text> */}
+            <Icon name="water" size={32} color="#FFD700" />
           </View>
           <Text style={styles.title}>Level Complete!</Text>
           <Text style={styles.message}>
