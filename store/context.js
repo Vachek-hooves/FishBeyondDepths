@@ -1,6 +1,8 @@
 import {createContext, useContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {labirinth} from '../data/labirinth'; // Import labirinth data
+import { backgrounds } from '../data/backgrounds';
+import { FISHES } from '../data/fishes';
 
 export const AppContext = createContext({});
 
