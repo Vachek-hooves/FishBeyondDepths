@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import PlainLayout from '../../components/Layout/PlainLayout';
@@ -12,10 +13,20 @@ import Header from '../../components/UI/Header';
 import {FISHES} from '../../data/fishes';
 import {backgrounds} from '../../data/backgrounds';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useAppContext} from '../../store/context';
+
 
 const {width} = Dimensions.get('window');
 
 const ShopScreen = () => {
+  const {
+    totalScore,
+    purchaseItem,
+    setBackground,
+    setFish,
+    isItemUnlocked,
+  } = useAppContext();
+  
   const [activeTab, setActiveTab] = useState('Backgrounds');
   const [currentIndex, setCurrentIndex] = useState(0);
   const items = activeTab === 'Backgrounds' ? backgrounds : FISHES;
@@ -28,9 +39,28 @@ const ShopScreen = () => {
     setCurrentIndex(prev => (prev < items.length - 1 ? prev + 1 : 0));
   };
 
+  const handleUnlock = () => {
+    const currentItem = items[currentIndex];
+    const itemType = activeTab === 'Backgrounds' ? 'backgrounds' : 'fishes';
+    
+    if (purchaseItem(itemType, currentItem.id, currentItem.price)) {
+      // Show success message
+      Alert.alert('Success', 'Item unlocked successfully!');
+    } else {
+      // Show insufficient funds message
+      Alert.alert('Error', 'Not enough points to unlock this item!');
+    }
+  };
+
   const handleSet = () => {
-    // Will add logic later to set background or fish
-    console.log('Setting', activeTab, items[currentIndex].name);
+    const currentItem = items[currentIndex];
+    const success = activeTab === 'Backgrounds' 
+      ? setBackground(currentItem.id)
+      : setFish(currentItem.id);
+      
+    if (success) {
+      Alert.alert('Success', `${activeTab.slice(0, -1)} set successfully!`);
+    }
   };
 
   const TabButton = ({title}) => (
@@ -78,18 +108,23 @@ const ShopScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {items[currentIndex].isActive ? (
+        {isItemUnlocked(
+          activeTab === 'Backgrounds' ? 'backgrounds' : 'fishes',
+          items[currentIndex].id
+        ) ? (
           <TouchableOpacity 
             style={[styles.unlockButton, styles.setButton]} 
             onPress={handleSet}>
             <Text style={styles.unlockText}>Set</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={styles.unlockButton}>
+          <TouchableOpacity 
+            style={styles.unlockButton}
+            onPress={handleUnlock}>
             <Text style={styles.unlockText}>Unlock</Text>
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>{items[currentIndex].price}</Text>
-              <Text style={styles.dropIcon}>💧</Text>
+               <Icon name="water" size={32} color="#FFD700" />
             </View>
           </TouchableOpacity>
         )}
